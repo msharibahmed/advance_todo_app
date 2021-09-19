@@ -1,4 +1,5 @@
 
+import 'package:advance_todo_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 //
@@ -45,7 +46,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                 });
                 if (user != null) {
                   Navigator.of(context).pushReplacementNamed(
-                      HomeScreen.routeName,
+                      HomePage.routeName,
                       arguments:user);
                 }
               },
