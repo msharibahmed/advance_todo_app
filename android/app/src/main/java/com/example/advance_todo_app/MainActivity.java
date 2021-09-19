@@ -1,4 +1,4 @@
-package com.example.advance_todo_app;
+package com.msharibahmed.advanceTodoApp;
 
 import io.flutter.embedding.android.FlutterActivity;
 

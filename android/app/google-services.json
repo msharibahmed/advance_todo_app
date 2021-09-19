@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "864969541126",
+    "project_id": "advance-todo-app-eef07",
+    "storage_bucket": "advance-todo-app-eef07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864969541126:android:6d08728ca4a7140e6f2587",
+        "android_client_info": {
+          "package_name": "com.msharibahmed.advanceTodoApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864969541126-skkhfudepnb5g74l6d866sp7p0fohc7v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.msharibahmed.advanceTodoApp",
+            "certificate_hash": "4f0b1befda8640028b2cd719fb91c17c3ce22548"
+          }
+        },
+        {
+          "client_id": "864969541126-sd5shd3c3cgh0ii4a028qabsvjal4o7h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlo9w8_MfTEuwxDYuFPSJs_HzVqik2haM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864969541126-sd5shd3c3cgh0ii4a028qabsvjal4o7h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
