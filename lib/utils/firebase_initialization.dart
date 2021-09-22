@@ -1,3 +1,4 @@
+import 'package:advance_todo_app/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,7 @@ class Authentication {
   static Future<void> signOut({required BuildContext context}) async {
     try {
       await FirebaseAuth.instance.signOut();
+       Navigator.pushReplacementNamed(context, LoginScreen.routeName);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         Authentication.customSnackBar(

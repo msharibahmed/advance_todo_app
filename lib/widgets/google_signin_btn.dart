@@ -1,4 +1,3 @@
-
 import 'package:advance_todo_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,15 +37,15 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   _isSigningIn = true;
                 });
 
-                User? user = await  Authentication.googleLogin(context: context);
-
-                setState(() {
-                  _isSigningIn = false;
-                });
+                User? user = await Authentication.googleLogin(context: context);
+                if (mounted) {
+                  setState(() {
+                    _isSigningIn = false;
+                  });
+                }
                 if (user != null) {
-                  Navigator.of(context).pushReplacementNamed(
-                      HomePage.routeName,
-                      arguments:user);
+                  Navigator.of(context).pushReplacementNamed(HomePage.routeName,
+                      );
                 }
               },
               child: Padding(
@@ -55,10 +54,10 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const <Widget>[
-                    // Image(
-                    //   image: AssetImage("assets/google_logo.png"),
-                    //   height: 35.0,
-                    // ),
+                    Image(
+                      image: AssetImage("assets/images/google_icon.png"),
+                      height: 35.0,
+                    ),
                     Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
