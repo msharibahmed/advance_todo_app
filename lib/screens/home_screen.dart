@@ -23,18 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // appBar: AppBar(
-        //   actions: [
-        //     IconButton(
-        //         onPressed: () async {
-        //           await Authentication.signOut(context: context);
-        //           Navigator.pushReplacementNamed(context, LoginScreen.routeName);
-        //         },
-        //         icon: const Icon(Icons.logout))
-        //   ],
-        // ),
-        AnimatedContainer(
+    return AnimatedContainer(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(borderRad)),
       width: double.infinity,
