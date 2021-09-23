@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 //
 import 'screens/home_page.dart';
@@ -8,10 +9,16 @@ import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/drawer_screen.dart';
 import 'screens/splash_screen.dart';
+import 'screens/add_task_screen.dart';
 //
 import '../provider/user_prov.dart';
 
 void main() async {
+  //for transparent status bar
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
+  //firebase initialization
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -36,6 +43,7 @@ class MyApp extends StatelessWidget {
               LoginScreen.routeName: (context) => const LoginScreen(),
               HomeScreen.routeName: (context) => const HomeScreen(),
               DrawerScreen.routeName: (context) => const DrawerScreen(),
+              AddTaskScreen.routeName: (context) => const AddTaskScreen(),
               HomePage.routeName: (context) => const HomePage(),
             },
             home: FutureBuilder<User?>(
@@ -52,7 +60,6 @@ class MyApp extends StatelessWidget {
                   return const HomePage();
                 })
 
-            //     })
             ));
   }
 }
