@@ -45,8 +45,7 @@ class LoginScreen extends StatelessWidget {
                               return const GoogleSignInButton();
                             }
                             return const CircularProgressIndicator(
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.orange),
+                              color: Colors.orange,
                             );
                           })
                     ]))));

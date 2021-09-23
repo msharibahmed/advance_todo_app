@@ -1,25 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    // FirebaseAuth.instance.authStateChanges().listen((user) {
-    //   if (user == null) {
-    //     Navigator.pushReplacementNamed(context, LoginScreen.routeName);
-    //   } else {
-    //     Navigator.pushReplacementNamed(context, HomePage.routeName);
-    //   }
-    // });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

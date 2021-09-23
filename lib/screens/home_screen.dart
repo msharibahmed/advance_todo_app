@@ -10,13 +10,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  double xOffset = 0;
+  double xOffset = 0, yOffset = 0, scaleFactor = 1, borderRad = 0;
 
-  double yOffset = 0;
-
-  double scaleFactor = 1;
   bool isDrawerOpen = false;
-  double borderRad = 0;
 
   @override
   Widget build(BuildContext context) {

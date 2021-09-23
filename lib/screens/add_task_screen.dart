@@ -116,7 +116,7 @@ class AddTaskScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Navigator.pushNamed(context, AddTaskScreen.routeName),
+        onPressed: () {},
         label: Row(
           children: const [
             Text('Add Task'),
