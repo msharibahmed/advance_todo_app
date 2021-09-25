@@ -16,38 +16,37 @@ class LoginScreen extends StatelessWidget {
     final _mq = MediaQuery.of(context).size;
 
     return Scaffold(
-        body: Form(
-            child: Padding(
-                padding: EdgeInsets.only(
-                  left: _mq.width * 0.070,
-                  right: _mq.width * 0.10,
+        body: SingleChildScrollView(
+      child: Padding(
+          padding: EdgeInsets.only(
+            left: _mq.width * 0.070,
+            right: _mq.width * 0.10,
+          ),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(height: 200),
+                const Logo(),
+                const SizedBox(height: 40),
+                const Text(
+                  'Get Started',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w100),
                 ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const SizedBox(height: 200),
-                      const Logo(),
-                      const SizedBox(height: 40),
-                      const Text(
-                        'Get Started',
-                        style: TextStyle(
-                            fontSize: 32, fontWeight: FontWeight.w100),
-                      ),
-                      const SizedBox(height: 10),
-                      FutureBuilder(
-                          future: Authentication.initializeFirebase(
-                              context: context),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return const Text('Error initializing Firebase');
-                            } else if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              return const GoogleSignInButton();
-                            }
-                            return const CircularProgressIndicator(
-                              color: Colors.orange,
-                            );
-                          })
-                    ]))));
+                const SizedBox(height: 10),
+                FutureBuilder(
+                    future: Authentication.initializeFirebase(context: context),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text('Error initializing Firebase');
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        return const GoogleSignInButton();
+                      }
+                      return const CircularProgressIndicator(
+                        color: Colors.orange,
+                      );
+                    })
+              ])),
+    ));
   }
 }

@@ -1,5 +1,5 @@
 import 'package:advance_todo_app/provider/user_prov.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:advance_todo_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
@@ -31,15 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
       duration: const Duration(milliseconds: 250),
       child: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.blue.withOpacity(0.2),
-              Colors.white54.withOpacity(0.1)
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(55),
+          gradient: backgroundGradient,
+          borderRadius: BorderRadius.circular(borderRad),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -61,7 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRad = 0;
                         });
                       },
-                      icon: const Icon(Icons.arrow_back_ios))
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black54,
+                      ))
                   : IconButton(
                       padding: const EdgeInsets.only(
                         right: 100,
@@ -75,7 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRad = 55;
                         });
                       },
-                      icon: const Icon(Icons.menu),
+                      icon: const Icon(
+                        Icons.menu,
+                        color: Colors.black54,
+                      ),
                     ),
               const SizedBox(height: 20),
               Consumer<UserInfoProv>(
