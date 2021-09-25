@@ -5,13 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 //
 import 'screens/home_page.dart';
-import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
-import 'screens/drawer_screen.dart';
 import 'screens/splash_screen.dart';
-import 'screens/add_task_screen.dart';
 //
 import '../provider/user_prov.dart';
+import '../provider/add_task_prov.dart';
+//
+import 'package:advance_todo_app/utils/routing.dart';
+
 
 void main() async {
   //for transparent status bar
@@ -32,20 +33,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider<UserInfoProv>(create: (_) => UserInfoProv())
+          ChangeNotifierProvider<UserInfoProv>(create: (_) => UserInfoProv()),
+          ChangeNotifierProvider<AddTaskProv>(create: (_) => AddTaskProv())
         ],
         builder: (context, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              primarySwatch: Colors.blue,
+              primarySwatch: Colors.indigo,
             ),
-            routes: {
-              LoginScreen.routeName: (context) => const LoginScreen(),
-              HomeScreen.routeName: (context) => const HomeScreen(),
-              DrawerScreen.routeName: (context) => const DrawerScreen(),
-              AddTaskScreen.routeName: (context) => const AddTaskScreen(),
-              HomePage.routeName: (context) => const HomePage(),
-            },
+            routes: routingMap,
             home: FutureBuilder<User?>(
                 future: FirebaseAuth.instance.authStateChanges().first,
                 builder: (context, snapshot) {
@@ -58,8 +54,6 @@ class MyApp extends StatelessWidget {
                   }
 
                   return const HomePage();
-                })
-
-            ));
+                })));
   }
 }

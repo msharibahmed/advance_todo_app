@@ -14,7 +14,7 @@ class TextFieldTheme {
   }
 
   static const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: Color.fromRGBO(244, 244, 244, 1)),
+    borderSide: BorderSide(color: Colors.black54),
     borderRadius: BorderRadius.all(Radius.circular(8.0)),
   );
 
