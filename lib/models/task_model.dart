@@ -1,4 +1,5 @@
-enum PriorityTag { regular, medium, urgent }
+// ignore_for_file: constant_identifier_names
+enum PriorityTag { Regular,Medium, Urgent }
 
 class TaskModel {
   final String id;

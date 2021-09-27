@@ -22,7 +22,7 @@ class PriorityButtonWidget extends StatelessWidget {
     return Stack(
       children: [
         Card(
-          elevation: 0,
+          elevation: tagBool?5:0,
           color: backgroundColor,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),

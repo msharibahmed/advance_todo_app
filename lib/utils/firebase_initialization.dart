@@ -1,10 +1,9 @@
-import 'package:advance_todo_app/screens/home_page.dart';
-import 'package:advance_todo_app/screens/login_screen.dart';
-import 'package:advance_todo_app/screens/splash_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+//
+import 'package:advance_todo_app/screens/login_screen.dart';
 
 class Authentication {
   static Future<FirebaseApp> initializeFirebase(
@@ -66,7 +65,7 @@ class Authentication {
   static Future<void> signOut({required BuildContext context}) async {
     try {
       await FirebaseAuth.instance.signOut();
-       Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+      Navigator.pushReplacementNamed(context, LoginScreen.routeName);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         Authentication.customSnackBar(

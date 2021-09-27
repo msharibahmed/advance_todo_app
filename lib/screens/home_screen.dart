@@ -1,5 +1,7 @@
+import 'package:advance_todo_app/provider/add_task_prov.dart';
 import 'package:advance_todo_app/provider/user_prov.dart';
 import 'package:advance_todo_app/utils/constants.dart';
+import 'package:advance_todo_app/widgets/task_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
@@ -91,60 +93,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontSize: 16,
                     letterSpacing: 3),
               ),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => TaskWidget(index: index),
-                  itemCount: 10,
-                ),
+              Consumer<AddTaskProv>(
+                builder: (context, tasksList, _) => tasksList.allTasks.isEmpty
+                    ? Image.asset('assets/images/add_more_tasks.png')
+                    : Expanded(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) =>
+                                TaskWidget(index: index),
+                            itemCount: tasksList.allTasks.length),
+                      ),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class TaskWidget extends StatelessWidget {
-  final int index;
-  const TaskWidget({Key? key, required this.index}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.black54.withOpacity(0.05)),
-          child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: RadioListTile(
-                activeColor: Colors.orange,
-                value: "value",
-                groupValue: "",
-                onChanged: (_) {},
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text('Create Physics Notes',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500)),
-                    Icon(Icons.mic_none_sharp),
-                    Padding(
-                      padding: EdgeInsets.only(right: 12.0),
-                      child: Text('Urgent',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w300)),
-                    )
-                  ],
-                ),
-                subtitle: const Text(
-                    'First physics then english. rest afterwards full on study.',
-                    style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w300)),
-              ))),
     );
   }
 }

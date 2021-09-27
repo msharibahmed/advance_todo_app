@@ -15,16 +15,7 @@ class DrawerScreen extends StatelessWidget {
     final _userInfo = Provider.of<UserInfoProv>(context).loggedInUserInfo;
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.blue.withOpacity(0.8),
-              Colors.white.withOpacity(0.4)
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        color: Color.fromRGBO(0, 0, 128, 0.8),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50.0),
           child: Column(
@@ -70,7 +61,7 @@ class DrawerScreen extends StatelessWidget {
               const Spacer(),
               DrawerListTileWidget(
                 title: 'Log Out',
-                icon: Icons.logout_rounded,
+                icon: Icons.power_settings_new_rounded,
                 func: () async {
                   await Authentication.signOut(context: context);
                 },
