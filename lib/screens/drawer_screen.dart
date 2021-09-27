@@ -1,10 +1,11 @@
-import 'package:advance_todo_app/provider/user_prov.dart';
-import 'package:advance_todo_app/utils/firebase_initialization.dart';
-import 'package:advance_todo_app/widgets/drawer_tile_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+//
+import 'package:advance_todo_app/provider/user_prov.dart';
+//
+import 'package:advance_todo_app/utils/firebase_initialization.dart';
+//
+import 'package:advance_todo_app/widgets/drawer_tile_widget.dart';
 
 class DrawerScreen extends StatelessWidget {
   static const routeName = '/drawer-screen';
@@ -15,7 +16,7 @@ class DrawerScreen extends StatelessWidget {
     final _userInfo = Provider.of<UserInfoProv>(context).loggedInUserInfo;
     return Scaffold(
       body: Container(
-        color: Color.fromRGBO(0, 0, 128, 0.8),
+        color:const Color.fromRGBO(0, 0, 128, 0.8),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50.0),
           child: Column(

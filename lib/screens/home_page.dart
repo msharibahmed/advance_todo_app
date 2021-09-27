@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 //
 import 'add_task_screen.dart';
 import 'home_screen.dart';
 import 'drawer_screen.dart';
 //
-import 'package:advance_todo_app/provider/priority_tag_prov.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/home-page';
