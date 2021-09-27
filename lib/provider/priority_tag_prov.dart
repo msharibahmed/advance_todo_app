@@ -8,9 +8,9 @@ class PriorityTagProv with ChangeNotifier {
       description: '',
       voiceNote: '',
       dateTime: DateTime.now(),
-      priorityTag: PriorityTag.regular);
+      priorityTag: PriorityTag.Regular);
 
-  void changePriorityTag({
+  void addTaskAttributes({
     String? id,
     String? title,
     String? description,
@@ -35,6 +35,6 @@ class PriorityTagProv with ChangeNotifier {
         description: '',
         voiceNote: '',
         dateTime: DateTime.now(),
-        priorityTag: PriorityTag.regular);
+        priorityTag: PriorityTag.Regular);
   }
 }
