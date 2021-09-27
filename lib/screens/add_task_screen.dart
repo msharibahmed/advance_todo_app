@@ -1,24 +1,33 @@
-import 'package:flutter/cupertino.dart';
+import 'package:advance_todo_app/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+//
+import 'package:advance_todo_app/models/task_model.dart';
+import 'package:advance_todo_app/provider/priority_tag_prov.dart';
+import 'package:advance_todo_app/widgets/priority_button_widget.dart';
 
-class AddTaskScreen extends StatelessWidget {
+
+class AddTaskScreen extends StatefulWidget {
   static const routeName = '/add-task-screen';
   const AddTaskScreen({Key? key}) : super(key: key);
 
   @override
+  State<AddTaskScreen> createState() => _AddTaskScreenState();
+}
+
+TextEditingController createTaskCtrl = TextEditingController();
+TextEditingController descriptionCtrl = TextEditingController();
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  @override
   Widget build(BuildContext context) {
+    final _priorityTagProv = Provider.of<PriorityTagProv>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.blue.withOpacity(0.1),
-                Colors.white38.withOpacity(0.2)
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: backgroundGradient
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -30,7 +39,10 @@ class AddTaskScreen extends StatelessWidget {
                 ),
                 IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded)),
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: Colors.black54,
+                    )),
                 Padding(
                   padding: const EdgeInsets.only(left: 50.0),
                   child: SizedBox(
@@ -44,6 +56,10 @@ class AddTaskScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextFormField(
+                        onSaved: (inputText) {},
+                        keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.sentences,
+                        // maxLines: 2,
                         decoration:
                             const InputDecoration(hintText: 'Create new task'),
                       ),
@@ -51,6 +67,10 @@ class AddTaskScreen extends StatelessWidget {
                         height: 50,
                       ),
                       TextFormField(
+                        onSaved: (inputText) {},
+                        keyboardType: TextInputType.text,
+                        textCapitalization: TextCapitalization.sentences,
+                        // maxLines: 10,
                         decoration:
                             const InputDecoration(hintText: 'Description'),
                       ),
@@ -83,28 +103,52 @@ class AddTaskScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          PriorityButtonWidget(
-                              backgroundColor: const Color(0xfffff3e0),
-                              title: 'Urgent',
-                              titleColor:
-                                  Colors.orangeAccent[200] ?? Colors.black),
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<PriorityTagProv>(context)
+                                  .changePriorityTag(tag: PriorityTag.urgent);
+                            },
+                            child: PriorityButtonWidget(
+                                selectedTag:
+                                    _priorityTagProv.tempTask.priorityTag,
+                                backgroundColor: const Color(0xfffff3e0),
+                                title: 'Urgent',
+                                titleColor:
+                                    Colors.orangeAccent[200] ?? Colors.black),
+                          ),
                           const SizedBox(
                             width: 25,
                           ),
-                          PriorityButtonWidget(
-                              backgroundColor:
-                                  Colors.indigo[100] ?? Colors.black,
-                              title: 'Regular',
-                              titleColor:
-                                  Colors.indigoAccent[200] ?? Colors.black),
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<PriorityTagProv>(context)
+                                  .changePriorityTag(tag: PriorityTag.regular);
+                            },
+                            child: PriorityButtonWidget(
+                                selectedTag:
+                                    _priorityTagProv.tempTask.priorityTag,
+                                backgroundColor:
+                                    Colors.indigo[100] ?? Colors.black,
+                                title: 'Regular',
+                                titleColor:
+                                    Colors.indigoAccent[200] ?? Colors.black),
+                          ),
                           const SizedBox(
                             width: 25,
                           ),
-                          PriorityButtonWidget(
-                              backgroundColor:
-                                  Colors.green[100] ?? Colors.black,
-                              title: 'Medium',
-                              titleColor: Colors.green[300] ?? Colors.black),
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<PriorityTagProv>(context)
+                                  .changePriorityTag(tag: PriorityTag.medium);
+                            },
+                            child: PriorityButtonWidget(
+                                selectedTag:
+                                    _priorityTagProv.tempTask.priorityTag,
+                                backgroundColor:
+                                    Colors.green[100] ?? Colors.black,
+                                title: 'Medium',
+                                titleColor: Colors.green[300] ?? Colors.black),
+                          )
                         ],
                       )
                     ],
@@ -127,47 +171,6 @@ class AddTaskScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class PriorityButtonWidget extends StatelessWidget {
-  final String title;
-  final Color backgroundColor;
-  final Color titleColor;
-
-  const PriorityButtonWidget({
-    required this.backgroundColor,
-    required this.title,
-    required this.titleColor,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Card(
-          elevation: 0,
-          color: backgroundColor,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-            child: Text(
-              title,
-              style: TextStyle(
-                  color: titleColor, fontWeight: FontWeight.w400, fontSize: 16),
-            ),
-          ),
-        ),
-        CircleAvatar(
-            backgroundColor: titleColor,
-            radius: 8,
-            child: const Icon(
-              Icons.check,
-              color: Colors.white,
-              size: 15,
-            )),
-      ],
     );
   }
 }

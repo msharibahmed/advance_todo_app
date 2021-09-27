@@ -1,0 +1,40 @@
+import 'package:advance_todo_app/models/task_model.dart';
+import 'package:flutter/material.dart';
+
+class PriorityTagProv with ChangeNotifier {
+  TaskModel tempTask = TaskModel(
+      id: '',
+      title: '',
+      description: '',
+      voiceNote: '',
+      dateTime: DateTime.now(),
+      priorityTag: PriorityTag.regular);
+
+  void changePriorityTag({
+    String? id,
+    String? title,
+    String? description,
+    String? voiceNote,
+    DateTime? dateTime,
+    PriorityTag? tag,
+  }) {
+    tempTask = TaskModel(
+        id: id ?? tempTask.id,
+        title: title ?? tempTask.title,
+        description: description ?? tempTask.description,
+        voiceNote: voiceNote ?? tempTask.voiceNote,
+        dateTime: dateTime ?? tempTask.dateTime,
+        priorityTag: tag ?? tempTask.priorityTag);
+    notifyListeners();
+  }
+
+  void resetTempTask() {
+    tempTask = TaskModel(
+        id: '',
+        title: '',
+        description: '',
+        voiceNote: '',
+        dateTime: DateTime.now(),
+        priorityTag: PriorityTag.regular);
+  }
+}
