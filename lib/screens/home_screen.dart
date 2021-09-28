@@ -1,9 +1,10 @@
 import 'package:advance_todo_app/provider/add_task_prov.dart';
 import 'package:advance_todo_app/provider/user_prov.dart';
 import 'package:advance_todo_app/utils/constants.dart';
-import 'package:advance_todo_app/widgets/task_widget.dart';
+import 'package:advance_todo_app/widgets/dismissible_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -99,8 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     : Expanded(
                         child: ListView.builder(
                             shrinkWrap: true,
-                            itemBuilder: (context, index) =>
-                                TaskWidget(index: index),
+                            itemBuilder: (context, index) => DismissibleWidget(
+                                  index: index,
+                                ),
                             itemCount: tasksList.allTasks.length),
                       ),
               ),

@@ -1,8 +1,12 @@
 import 'package:advance_todo_app/models/task_model.dart';
+import 'package:advance_todo_app/provider/add_task_prov.dart';
+import 'package:advance_todo_app/provider/priority_tag_prov.dart';
+import 'package:advance_todo_app/screens/add_task_screen.dart';
 import 'package:advance_todo_app/utils/constants.dart';
 import 'package:advance_todo_app/widgets/priority_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class ExpandedTaskDialog extends StatelessWidget {
   final TaskModel task;
@@ -34,17 +38,17 @@ class ExpandedTaskDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final _mq = MediaQuery.of(context).size;
     return Padding(
-      padding:const EdgeInsets.symmetric( horizontal: 50),
+      padding: const EdgeInsets.symmetric(horizontal: 50),
       child: Center(
         child: SingleChildScrollView(
-          child: Container(constraints: BoxConstraints( minHeight:  _mq.height /5),
+          child: Container(
+            constraints: BoxConstraints(minHeight: _mq.height / 5),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20), color: Colors.white),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              
               children: [
                 Row(
                   children: [
@@ -59,15 +63,15 @@ class ExpandedTaskDialog extends StatelessWidget {
                 const SizedBox(height: 20),
                 const TaskFieldHeading(text: 'Task Name'),
                 Text(task.title,
-                    style:
-                        const TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w600)),
                 const SizedBox(
                   height: 20,
                 ),
                 const TaskFieldHeading(text: 'Task Description'),
-                Text(task.description ==''?'-':task.description ,
-                    style:
-                        const TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+                Text(task.description == '' ? '-' : task.description,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w400)),
                 const SizedBox(
                   height: 20,
                 ),
@@ -85,16 +89,39 @@ class ExpandedTaskDialog extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Provider.of<AddTaskProv>(context, listen: false)
+                            .deleteTask(task.id);
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                duration: Duration(seconds: 1),
+                                content: Text('Succesfully deleted!')));
+                      },
                       child: const Text('Delete'),
                       style: ElevatedButton.styleFrom(primary: Colors.red),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Provider.of<PriorityTagProv>(context, listen: false)
+                            .addTaskAttributes(
+                                id: task.id,
+                                title: task.title,
+                                description: task.description,
+                                voiceNote: task.voiceNote,
+                                tag: task.priorityTag,
+                                dateTime: task.dateTime);
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, AddTaskScreen.routeName);
+                      },
                       child: const Text('Update'),
                       style: ElevatedButton.styleFrom(primary: Colors.blue),
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('Close')),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close')),
                   ],
                 )
               ],

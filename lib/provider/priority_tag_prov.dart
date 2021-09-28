@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class PriorityTagProv with ChangeNotifier {
   TaskModel tempTask = TaskModel(
-      id: '',
+      id: DateTime.now().toIso8601String(),
       title: '',
       description: '',
       voiceNote: '',
@@ -30,7 +30,7 @@ class PriorityTagProv with ChangeNotifier {
 
   void resetTempTask() {
     tempTask = TaskModel(
-        id: '',
+        id: DateTime.now().toIso8601String(),
         title: '',
         description: '',
         voiceNote: '',

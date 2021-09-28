@@ -7,11 +7,20 @@ class AddTaskProv with ChangeNotifier {
     return [..._allTasks];
   }
 
-  void updateTask(TaskModel task) {}
-  void createTask(TaskModel task) {
-    _allTasks.add(task);
-    notifyListeners(); 
+  void updateTask(TaskModel task) {
+    int _index = _allTasks.indexWhere((element) => element.id == task.id);
+    _allTasks[_index] = task;
+
+    notifyListeners();
   }
 
-  void deleteTask(TaskModel task) {}
+  void createTask(TaskModel task) {
+    _allTasks.add(task);
+    notifyListeners();
+  }
+
+  void deleteTask(String id) {
+    _allTasks.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
 }

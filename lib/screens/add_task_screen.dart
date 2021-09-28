@@ -34,6 +34,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     style: ElevatedButton.styleFrom(primary: Colors.red),
                     child: const Text('close'),
                     onPressed: () {
+                      Provider.of<PriorityTagProv>(context, listen: false)
+                          .resetTempTask();
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
                     }),
@@ -47,6 +49,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     final _priorityTagProv = Provider.of<PriorityTagProv>(context);
+    // print(_priorityTagProv.tempTask.title);
+    final _updating = _priorityTagProv.tempTask.title != '';
+
     // final bool fieldsEmptyCondition =
     //     _priorityTagProv.tempTask.title.trim() == '' &&
     //         _priorityTagProv.tempTask.description.trim() == '';
@@ -84,6 +89,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextFormField(
+                          initialValue: _updating
+                              ? _priorityTagProv.tempTask.title
+                              : null,
                           onSaved: (inputText) {
                             _priorityTagProv.addTaskAttributes(
                                 title: inputText?.trim());
@@ -97,13 +105,20 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           keyboardType: TextInputType.text,
                           textCapitalization: TextCapitalization.sentences,
                           // maxLines: 2,
-                          decoration: const InputDecoration(
-                              hintText: 'Create new task'),
+                          decoration: InputDecoration(
+                              hintText: _updating
+                                  ? createTaskCtrl.text.isEmpty
+                                      ? 'Update task name'
+                                      : null
+                                  : 'Create new task'),
                         ),
                         const SizedBox(
                           height: 50,
                         ),
                         TextFormField(
+                          initialValue: _updating
+                              ? _priorityTagProv.tempTask.description
+                              : null,
                           onSaved: (inputText) {
                             _priorityTagProv.addTaskAttributes(
                                 description: inputText);
@@ -111,8 +126,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           keyboardType: TextInputType.text,
                           textCapitalization: TextCapitalization.sentences,
                           // maxLines: 10,
-                          decoration:
-                              const InputDecoration(hintText: 'Description'),
+                          decoration: InputDecoration(
+                              hintText: _updating
+                                  ? descriptionCtrl.text.isEmpty
+                                      ? 'Description'
+                                      : null
+                                  : 'Description'),
                         ),
                         const SizedBox(
                           height: 50,
@@ -204,18 +223,28 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               return;
             }
             _formStateKey.currentState!.save();
-            Provider.of<AddTaskProv>(context, listen: false)
-                .createTask(_priorityTagProv.tempTask);
+            if (_updating) {
+              Provider.of<AddTaskProv>(context, listen: false)
+                  .updateTask(_priorityTagProv.tempTask);
+            } else {
+              Provider.of<AddTaskProv>(context, listen: false)
+                  .createTask(_priorityTagProv.tempTask);
+            }
+
             _priorityTagProv.resetTempTask();
             Navigator.pop(context);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              duration:const Duration(seconds: 1),
+                content:
+                    Text('Succesfully' + (_updating ? 'Updated!' : 'added!'))));
           },
           label: Row(
-            children: const [
-              Text('Add Task'),
-              SizedBox(
+            children: [
+              Text(_updating ? 'Update Task' : 'Add Task'),
+              const SizedBox(
                 width: 5,
               ),
-              Icon(Icons.save_rounded)
+              const Icon(Icons.save_rounded)
             ],
           ),
         ),
