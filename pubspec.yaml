@@ -27,12 +27,22 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  # state_management
   provider: ^6.0.0
+  # firebase_packages
   firebase_auth: ^3.1.1
   firebase_core: ^1.6.0
+  # sign_in using google account
   google_sign_in: ^5.1.0
+  # date_time mangement
   intl: ^0.17.0
+  # fonts
   google_fonts: ^2.1.0
+  # audio_recording/play
+  flutter_sound_lite: ^8.3.12
+  # file_permission
+  permission_handler: ^8.1.6
+
   flutter:
     sdk: flutter
 
