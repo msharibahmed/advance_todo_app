@@ -1,14 +1,10 @@
+import 'package:advance_todo_app/utils/firebase_initialization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-//
-import 'screens/home_page.dart';
-import 'screens/login_screen.dart';
-import 'screens/splash_screen.dart';
 //
 import '../provider/user_prov.dart';
 import '../provider/priority_tag_prov.dart';
@@ -52,18 +48,6 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.indigo,
             ),
             routes: routingMap,
-            home: FutureBuilder<User?>(
-                future: FirebaseAuth.instance.authStateChanges().first,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const SplashScreen();
-                  }
-                  final user = snapshot.data;
-                  if (user == null) {
-                    return const LoginScreen();
-                  }
-
-                  return const HomePage();
-                })));
+            home: Authentication.firstScreen()));
   }
 }

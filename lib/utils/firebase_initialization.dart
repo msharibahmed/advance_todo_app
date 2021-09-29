@@ -1,3 +1,5 @@
+import 'package:advance_todo_app/screens/home_page.dart';
+import 'package:advance_todo_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,6 +8,23 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:advance_todo_app/screens/login_screen.dart';
 
 class Authentication {
+  static Widget firstScreen() {
+    Widget _firstScreen = FutureBuilder<User?>(
+        future: FirebaseAuth.instance.authStateChanges().first,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const SplashScreen();
+          }
+          final user = snapshot.data;
+          if (user == null) {
+            return const LoginScreen();
+          }
+
+          return const HomePage();
+        });
+    return _firstScreen;
+  }
+
   static Future<FirebaseApp> initializeFirebase(
       {required BuildContext context}) async {
     Future<FirebaseApp> firebaseApp = Firebase.initializeApp();
