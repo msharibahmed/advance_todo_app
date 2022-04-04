@@ -3,8 +3,6 @@ import 'package:advance_todo_app/provider/user_prov.dart';
 import 'package:advance_todo_app/utils/constants.dart';
 import 'package:advance_todo_app/widgets/dismissible_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {

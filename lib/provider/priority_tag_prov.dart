@@ -6,7 +6,7 @@ class PriorityTagProv with ChangeNotifier {
       id: DateTime.now().toIso8601String(),
       title: '',
       description: '',
-      voiceNote: '',
+      voiceNotePath: '',
       dateTime: DateTime.now(),
       priorityTag: PriorityTag.Regular);
 
@@ -22,7 +22,7 @@ class PriorityTagProv with ChangeNotifier {
         id: id ?? tempTask.id,
         title: title ?? tempTask.title,
         description: description ?? tempTask.description,
-        voiceNote: voiceNote ?? tempTask.voiceNote,
+        voiceNotePath: voiceNote ?? tempTask.voiceNotePath,
         dateTime: dateTime ?? tempTask.dateTime,
         priorityTag: tag ?? tempTask.priorityTag);
     notifyListeners();
@@ -33,7 +33,7 @@ class PriorityTagProv with ChangeNotifier {
         id: DateTime.now().toIso8601String(),
         title: '',
         description: '',
-        voiceNote: '',
+        voiceNotePath: '',
         dateTime: DateTime.now(),
         priorityTag: PriorityTag.Regular);
   }

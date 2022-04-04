@@ -54,7 +54,7 @@ class DismissibleWidget extends StatelessWidget {
               id: _task.id,
               title: _task.title,
               description: _task.description,
-              voiceNote: _task.voiceNote,
+              voiceNote: _task.voiceNotePath,
               tag: _task.priorityTag,
               dateTime: _task.dateTime);
           Navigator.pushNamed(context, AddTaskScreen.routeName);

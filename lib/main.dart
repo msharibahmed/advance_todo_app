@@ -1,3 +1,4 @@
+import 'package:advance_todo_app/provider/voice_recorder_prov.dart';
 import 'package:advance_todo_app/utils/firebase_initialization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<UserInfoProv>(create: (_) => UserInfoProv()),
           ChangeNotifierProvider<AddTaskProv>(create: (_) => AddTaskProv()),
+          ChangeNotifierProvider<VoiceRecorderProv>(create: (_) => VoiceRecorderProv()),
           ChangeNotifierProvider<PriorityTagProv>(
               create: (_) => PriorityTagProv()),
         ],

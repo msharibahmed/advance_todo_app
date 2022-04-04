@@ -1,5 +1,7 @@
 import 'package:advance_todo_app/provider/add_task_prov.dart';
+import 'package:advance_todo_app/provider/voice_recorder_prov.dart';
 import 'package:advance_todo_app/utils/constants.dart';
+import 'package:advance_todo_app/widgets/voice_recording_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 //
@@ -15,10 +17,18 @@ class AddTaskScreen extends StatefulWidget {
   State<AddTaskScreen> createState() => _AddTaskScreenState();
 }
 
-TextEditingController createTaskCtrl = TextEditingController();
-TextEditingController descriptionCtrl = TextEditingController();
-
 class _AddTaskScreenState extends State<AddTaskScreen> {
+  final recorder = VoiceRecorderProv();
+
+  @override
+  void dispose() {
+    super.dispose();
+    createTaskCtrl.dispose();
+    descriptionCtrl.dispose();
+  }
+
+  TextEditingController createTaskCtrl = TextEditingController();
+  TextEditingController descriptionCtrl = TextEditingController();
   final _formStateKey = GlobalKey<FormState>();
   Future<void> willPopShowDialog() async {
     return showDialog(
@@ -139,7 +149,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         Row(
                           children: const [
                             Text('Add voice note'),
-                            Icon(Icons.mic_none_sharp)
+                            VoiceRecordWidget(),
                           ],
                         ),
                         const SizedBox(
@@ -234,7 +244,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             _priorityTagProv.resetTempTask();
             Navigator.pop(context);
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              duration:const Duration(seconds: 1),
+                duration: const Duration(seconds: 1),
                 content:
                     Text('Succesfully' + (_updating ? 'Updated!' : 'added!'))));
           },

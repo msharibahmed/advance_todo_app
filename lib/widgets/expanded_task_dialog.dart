@@ -108,7 +108,7 @@ class ExpandedTaskDialog extends StatelessWidget {
                                 id: task.id,
                                 title: task.title,
                                 description: task.description,
-                                voiceNote: task.voiceNote,
+                                voiceNote: task.voiceNotePath,
                                 tag: task.priorityTag,
                                 dateTime: task.dateTime);
                         Navigator.pop(context);
